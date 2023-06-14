@@ -1,5 +1,5 @@
-## Distributed MongoDB
-A distributed system with [mongodb](https://www.mongodb.com/).
+## Express MongoDB
+A distributed system with [mongodb](https://www.mongodb.com/), not a best practice.
 
 ### Project Setup
 
