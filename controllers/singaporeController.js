@@ -1,11 +1,13 @@
 const { ObjectId } = require('mongodb');
+const { uid } = require('uid')
 
 const { clientsg } = require('../server/singapore');
+const { clientjkt } = require('../server/jakarta');
 
 const dbName = "sample_guides"
-const collName = "planets"
+const collName = "tes"
 
-class JakartaController{
+class SingaporeController{
     static async findOne(req, res) {
         try{
           await clientsg.connect();
@@ -31,47 +33,41 @@ class JakartaController{
           await clientsg.close();
         }  
     }
-    static async add(req, res){
+    static async add(data){
       try {
           await clientsg.connect();
           const db = clientsg.db(dbName);
           const coll = db.collection(collName);
-          const data = {
-            name: 'tes'
-          }
 
-          const result = await coll.insertOne({'name' : 'tes'})
-          res.status(200).json({"Result" : "SUCCESS"});
+          const result = await coll.insertOne(data)
       } finally {
         await clientsg.close();
       }
     }
-    static async update(req, res){
-      try {
-        await clientsg.connect();
-          const db = clientsg.db(dbName);
-          const coll = db.collection(collName);
-        const updateone = await coll.findOneAndUpdate(
-          {name: 'tes'}, // find one
-          {$set : {name : 'tesupdate'}}, // new data
-        )
-        res.status(200).json({"Result" : "SUCCESS"});
-      } finally {
-        await clientsg.close();
-      }
-    }
-    static async delete(req, res){
+    static async update(find, data){
       try {
         await clientsg.connect();
         const db = clientsg.db(dbName);
         const coll = db.collection(collName);
-        const deleteone = await coll.deleteOne({_id : new ObjectId('6487af06c013ef963284f215')})
-        res.status(200).json({"Result" : "SUCCESS"});
+        const updateone = await coll.findOneAndUpdate(
+            {id: find}, // find one
+            {$set : data}, // new data
+        )
+      } finally {
+        await clientsg.close();
+      }
+    }
+    static async delete(id){
+      try {
+        await clientsg.connect();
+        const db = clientsg.db(dbName);
+        const coll = db.collection(collName);
+        const deleteone = await coll.deleteOne({id : id})
       } finally {
         await clientsg.close()
       }
     }
 }
 
-module.exports = JakartaController
+module.exports = SingaporeController
 
