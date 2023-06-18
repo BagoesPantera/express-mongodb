@@ -1,5 +1,3 @@
-const { ObjectId } = require('mongodb');
-
 const { clientsg } = require('../server/singapore');
 const { clientjkt } = require('../server/jakarta');
 const JakartaController = require('./jakartaController');

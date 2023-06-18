@@ -1,38 +1,9 @@
-const { ObjectId } = require('mongodb');
-const { uid } = require('uid')
-
 const { clientsg } = require('../server/singapore');
-const { clientjkt } = require('../server/jakarta');
 
 const dbName = "sample_guides"
 const collName = "tes"
 
 class SingaporeController{
-    static async findOne(req, res) {
-        try{
-          await clientsg.connect();
-          const db = clientsg.db(dbName);
-          const coll = db.collection(collName);
-      
-          const cursor = await coll.find({_id : new ObjectId(req.body.id)}).toArray();
-          res.send(cursor).status(200);
-        }finally{
-          await clientsg.close();
-        }  
-    }
-
-    static async findAll(req, res) {
-        try{
-          await clientsg.connect();
-          const db = clientsg.db(dbName);
-          const coll = db.collection(collName);
-      
-          const cursor = await coll.find().toArray();
-          res.send(cursor).status(200);
-        }finally{
-          await clientsg.close();
-        }  
-    }
     static async add(data){
       try {
           await clientsg.connect();

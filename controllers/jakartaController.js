@@ -1,5 +1,3 @@
-const { ObjectId } = require('mongodb');
-
 const { clientjkt } = require('../server/jakarta');
 const dbName = "sample_guides"
 const collName = "tes"
